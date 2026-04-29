@@ -1,0 +1,103 @@
+/* GRID LAYOUT (3 + 3 automatically) */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px;
+    justify-items: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CARD */
+.card {
+    position: relative;
+    width: 220px;
+    height: 260px;
+    cursor: pointer;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card:hover .blob {
+    opacity: 0.7;
+    animation: blob-spin 6s linear infinite;
+}
+
+/* GLASS BACKGROUND */
+.bg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 210px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px);
+    border-radius: 10px;
+    outline: 2px solid white;
+    z-index: 2;
+}
+
+/* ROTATING BLOB */
+
+.blob {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    filter: blur(12px);
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+@keyframes blob-spin {
+    0% {
+        transform: rotate(0deg) translateX(55px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(55px) rotate(-360deg);
+    }
+}
+
+/* CONTENT */
+.content {
+    position: relative;
+    z-index: 3;
+    padding: 15px;
+    text-align: center;
+    color: #111;
+}
+
+.content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0.85;
+}
