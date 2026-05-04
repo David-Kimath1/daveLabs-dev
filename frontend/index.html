@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaveLabs-Dev</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DaveLabs-Dev | Modern Web Solutions</title>
+    <!-- External Stylesheets & Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19/build/css/intlTelInput.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,6 +17,16 @@
         <div class="header">
             <a href="index.html">DaveLabs</a>
         </div>
+
+        <!-- Mobile Burger Menu Button -->
+        <div class="burger-menu">
+            <div class="burger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
         <nav class="nav__links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
@@ -48,7 +60,7 @@
             </a>
         </div>
     </section>
-    
+
     <section id="services">
         <div class="services">
             <h2>Our Services</h2>
@@ -178,7 +190,7 @@
                     <li>Contact Form</li>
                     <li>Basic SEO Setup</li>
                 </ul>
-             <a href="#contact-us" style="text-decoration: none; color: inherit;">
+                <a href="#contact-us" style="text-decoration: none; color: inherit;">
                     <button>Get Started</button>
                 </a>
             </div>
@@ -196,7 +208,6 @@
                 <a href="#contact-us" style="text-decoration: none; color: inherit;">
                     <button>Get Started</button>
                 </a>
-                <!-- <button>Get Started</button=> -->
             </div>
             <div class="pricing-card premium card_box">
                 <span></span>
@@ -209,7 +220,7 @@
                     <li>Advanced Animations</li>
                     <li>Security + Optimization</li>
                 </ul>
-               <a href="#contact-us" style="text-decoration: none; color: inherit;">
+                <a href="#contact-us" style="text-decoration: none; color: inherit;">
                     <button>Get Started</button>
                 </a>
             </div>
@@ -226,47 +237,39 @@
         </div>
     </section>
 
-    <section id="testimonials">
-      
-    </section>
-<section id="featured-work">
-
-</section>
-
     <section id="contact-us">
-    <div class="contact-us">
-        <h2>Contact Us</h2>
-        <p>Have questions, want to start a project or want to collaborate? We'd love to hear from you!</p>
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>Have questions, want to start a project or want to collaborate? We'd love to hear from you!</p>
 
-        <div class="input">
-            <input type="text" id="your-name" placeholder="Your Name" required>
-        </div>
-        <div class="input">
-            <input type="text" id="company" placeholder="Company Name (Optional)">
-        </div>
-        <div class="input">
-            <input type="email" id="your-email" placeholder="Email Address" required>
-        </div>
-        
-        <!-- Phone input with intl-tel-input -->
-        <div class="phone-container">
-            <input type="tel" id="your-phoneNumber" required placeholder="Phone number">
-        </div>
-        
-        <div class="textarea">
-            <textarea required placeholder="Write your message here...." id="your-Message"></textarea>
-        </div>
+            <div class="input">
+                <input type="text" id="your-name" placeholder="Your Name" required>
+            </div>
+            <div class="input">
+                <input type="text" id="company" placeholder="Company Name (Optional)">
+            </div>
+            <div class="input">
+                <input type="email" id="your-email" placeholder="Email Address" required>
+            </div>
 
-        <button id="send-via-Email">
-            <i class="fa-solid fa-envelope"></i>
-            <span>Send via Email</span>
-        </button>
-        <button id="send-via-whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-            <span>Send via WhatsApp</span>
-        </button>
-    </div>
-</section>
+            <div class="phone-container">
+                <input type="tel" id="your-phoneNumber" required placeholder="Phone number">
+            </div>
+
+            <div class="textarea">
+                <textarea required placeholder="Write your message here...." id="your-Message"></textarea>
+            </div>
+
+            <button id="send-via-Email">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Send via Email</span>
+            </button>
+            <button id="send-via-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Send via WhatsApp</span>
+            </button>
+        </div>
+    </section>
 
     <section id="quick-links">
         <div class="quick-links">
@@ -286,8 +289,8 @@
         <div class="legal">
             <h2>Legal</h2>
             <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="/policy/index.html">Privacy Policy</a></li>
+                <li><a href="/terms/index.html">Terms of Service</a></li>
             </ul>
         </div>
     </section>
@@ -303,8 +306,10 @@
         </div>
     </section>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19/build/js/intlTelInput.min.js"></script>
-<script src="script.js"></script>
+    <!-- External Scripts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19/build/js/intlTelInput.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

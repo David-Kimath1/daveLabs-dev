@@ -1,3 +1,5 @@
+// Replace script.js with this updated version that includes blur overlay and smooth animations
+
 // ========== EMAILJS CONFIGURATION ==========
 (function() {
     emailjs.init("UgTt55uwT09RSZFKd");
@@ -13,13 +15,13 @@ function showToast(message, type = 'error') {
 
     const toast = document.createElement('div');
     toast.className = 'davelabs-toast';
-    
+
     let icon = '';
     if (type === 'error') icon = '<i class="fas fa-exclamation-circle"></i>';
     else if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
     else if (type === 'info') icon = '<i class="fas fa-info-circle"></i>';
     else icon = '<i class="fas fa-clock"></i>';
-    
+
     toast.innerHTML = `
         <div class="toast-content ${type}">
             ${icon}
@@ -27,15 +29,15 @@ function showToast(message, type = 'error') {
             <button class="toast-close"><i class="fas fa-times"></i></button>
         </div>
     `;
-    
+
     document.body.appendChild(toast);
-    
+
     const closeBtn = toast.querySelector('.toast-close');
     closeBtn.addEventListener('click', () => {
         toast.style.animation = 'slideOut 0.3s ease forwards';
         setTimeout(() => toast.remove(), 300);
     });
-    
+
     setTimeout(() => {
         if (toast.parentNode) {
             toast.style.animation = 'slideOut 0.3s ease forwards';
@@ -44,7 +46,7 @@ function showToast(message, type = 'error') {
     }, 4000);
 }
 
-// Add toast styles
+// Add toast styles dynamically
 const toastStyles = document.createElement('style');
 toastStyles.textContent = `
     .davelabs-toast { position: fixed; top: 20px; right: 20px; z-index: 10000; animation: slideIn 0.3s ease forwards; }
@@ -69,11 +71,11 @@ function smoothScrollToElement(element, duration = 800) {
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let startTime = null;
-    
+
     function easeInOutCubic(t) {
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
-    
+
     function animation(currentTime) {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
@@ -85,14 +87,106 @@ function smoothScrollToElement(element, duration = 800) {
     requestAnimationFrame(animation);
 }
 
+// ========== BURGER MENU WITH BLUR EFFECT & BOTTOM TO TOP ANIMATION ==========
+function initBurgerMenu() {
+    const burgerBtn = document.querySelector('.burger-menu');
+    const navMenu = document.querySelector('.nav__links');
+    const body = document.body;
+
+    if (!burgerBtn || !navMenu) return;
+
+    // Create blur overlay element
+    const blurOverlay = document.createElement('div');
+    blurOverlay.className = 'blur-overlay';
+    blurOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    `;
+    document.body.appendChild(blurOverlay);
+
+    // Function to open menu
+    function openMenu() {
+        burgerBtn.classList.add('active');
+        navMenu.classList.add('active');
+        body.classList.add('menu-open');
+        blurOverlay.style.visibility = 'visible';
+        blurOverlay.style.opacity = '1';
+        
+        // Prevent body scroll
+        body.style.overflow = 'hidden';
+    }
+
+    // Function to close menu
+    function closeMenu() {
+        burgerBtn.classList.remove('active');
+        navMenu.classList.remove('active');
+        body.classList.remove('menu-open');
+        blurOverlay.style.visibility = 'hidden';
+        blurOverlay.style.opacity = '0';
+        
+        // Restore body scroll
+        body.style.overflow = '';
+    }
+
+    // Toggle menu on burger click
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (navMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // Close menu when clicking on blur overlay
+    blurOverlay.addEventListener('click', () => {
+        closeMenu();
+    });
+
+    // Close menu when clicking on a navigation link
+    const navLinks = document.querySelectorAll('.nav__links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // Close menu on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+
+    // Handle window resize - close menu if switching to desktop view
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        }, 250);
+    });
+}
+
 // ========== MAIN INITIALIZATION ==========
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('.nav__links a');
-    const quickLinks = document.querySelectorAll('#quick-links a');
-    const allLinks = [...navLinks, ...quickLinks];
+    initBurgerMenu(); // Initialize burger menu with blur effect
 
-    allLinks.forEach(link => {
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('.nav__links a, #quick-links a');
+    navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
@@ -107,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== INITIALIZE INTEL-TEL-INPUT ==========
     const phoneInput = document.querySelector("#your-phoneNumber");
     let iti = null;
-    
+
     if (phoneInput) {
         iti = window.intlTelInput(phoneInput, {
             initialCountry: "ke",
@@ -126,13 +220,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const company = document.getElementById('company')?.value.trim() || '';
         const email = document.getElementById('your-email')?.value.trim() || '';
         const message = document.getElementById('your-Message')?.value.trim() || '';
-        
+
         let fullPhone = '';
         let countryName = 'Kenya';
         let countryCode = '+254';
-        
+
         if (iti) {
-            fullPhone = iti.getNumber(); // Gets full international number
+            fullPhone = iti.getNumber();
             const selectedCountryData = iti.getSelectedCountryData();
             countryName = selectedCountryData.name;
             countryCode = `+${selectedCountryData.dialCode}`;
@@ -140,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const phoneRaw = document.getElementById('your-phoneNumber')?.value.trim() || '';
             fullPhone = phoneRaw;
         }
-        
+
         return { name, company, email, phone: fullPhone, message, countryName, countryCode };
     }
 
@@ -182,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function sendEmail(formData) {
-    const fullMessage = `Name: ${formData.name}
+        const fullMessage = `Name: ${formData.name}
 Company: ${formData.company || 'Not provided'}
 Phone: ${formData.phone}
 Email: ${formData.email}
@@ -191,27 +285,25 @@ Country: ${formData.countryName}
 Message:
 ${formData.message}`;
 
-    const templateParams = {
-        title: `New message from ${formData.name}`,
-        from_name: formData.name,
-        from_email: formData.email,      // This is critical!
-        reply_email: formData.email,
-        message: fullMessage,
-        // Add these extra fields to be safe
-        user_email: formData.email,
-        client_email: formData.email
-    };
+        const templateParams = {
+            title: `New message from ${formData.name}`,
+            from_name: formData.name,
+            from_email: formData.email,
+            reply_email: formData.email,
+            message: fullMessage,
+            user_email: formData.email,
+            client_email: formData.email
+        };
 
-    try {
-        const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
-        console.log('Email sent:', response);
-        console.log('Sent from email:', formData.email);  // Debug log
-        return { success: true };
-    } catch (error) {
-        console.error('Email error:', error);
-        return { success: false, error: error.text };
+        try {
+            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+            console.log('Email sent:', response);
+            return { success: true };
+        } catch (error) {
+            console.error('Email error:', error);
+            return { success: false, error: error.text };
+        }
     }
-}
 
     function resetForm() {
         document.getElementById('your-name').value = '';
@@ -219,62 +311,45 @@ ${formData.message}`;
         document.getElementById('your-email').value = '';
         document.getElementById('your-phoneNumber').value = '';
         document.getElementById('your-Message').value = '';
-        
-        // Reset phone input to Kenya
         if (iti) {
             iti.setCountry('ke');
             iti.setNumber('');
         }
     }
 
-    // Send via Email
     if (sendEmailBtn) {
         sendEmailBtn.addEventListener('click', async function(e) {
             e.preventDefault();
-            
             if (!validateForm()) return;
-            
             const formData = getFormData();
-            
             const originalText = this.innerHTML;
             this.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sending...';
             this.disabled = true;
-            
             const result = await sendEmail(formData);
-            
             if (result.success) {
                 showToast('Message sent successfully! We will respond within 24 hours.', 'success');
                 resetForm();
             } else {
                 showToast('Failed to send. Please try again or use WhatsApp.', 'error');
             }
-            
             this.innerHTML = originalText;
             this.disabled = false;
         });
     }
 
-    // Send via WhatsApp
     if (sendWhatsAppBtn) {
         sendWhatsAppBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            
             if (!validateForm()) return;
-            
             const formData = getFormData();
-            
             let message = '';
             message += `Name: ${formData.name}\n`;
-            if (formData.company) {
-                message += `Company: ${formData.company}\n`;
-            }
+            if (formData.company) message += `Company: ${formData.company}\n`;
             message += `Phone: ${formData.phone}\n`;
             message += `Email: ${formData.email}\n\n`;
             message += `Message:\n${formData.message}`;
-            
             const phoneNumber = '254733588676';
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
             window.open(whatsappLink, '_blank');
             showToast('WhatsApp will open to send your message.', 'info');
         });
@@ -283,7 +358,7 @@ ${formData.message}`;
     // ========== ACTIVE NAVIGATION ==========
     const sections = document.querySelectorAll('section[id]');
     const navActiveLinks = document.querySelectorAll('.nav__links a');
-    
+
     function updateActiveNav() {
         const scrollPosition = window.scrollY + 150;
         let currentSection = '';
@@ -300,25 +375,14 @@ ${formData.message}`;
             if (href === `#${currentSection}`) link.classList.add('active');
         });
     }
-    
-    const enhancedStyles = document.createElement('style');
-    enhancedStyles.textContent = `
-        .nav__links a.active { color: #0066ff; font-weight: 600; position: relative; }
-        .nav__links a.active::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, #0066ff, #00c3ff); border-radius: 2px;
-            animation: underlineSlide 0.3s ease forwards;
-        }
-        @keyframes underlineSlide { from { width: 0; opacity: 0; } to { width: 100%; opacity: 1; } }
-        .nav__links a { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        button:disabled { opacity: 0.6; cursor: not-allowed; }
-    `;
-    document.head.appendChild(enhancedStyles);
-    
+
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
-            requestAnimationFrame(() => { updateActiveNav(); ticking = false; });
+            requestAnimationFrame(() => {
+                updateActiveNav();
+                ticking = false;
+            });
             ticking = true;
         }
     });
@@ -337,7 +401,7 @@ ${formData.message}`;
         counterContainer.appendChild(icon);
         counterContainer.appendChild(counter);
         textarea.parentNode.appendChild(counterContainer);
-        
+
         function updateCounter() {
             const length = textarea.value.length;
             if (length === 0) {
@@ -358,5 +422,5 @@ ${formData.message}`;
         updateCounter();
     }
 
-    console.log('DaveLabs website ready - intl-tel-input active');
+    console.log('DaveLabs website ready - Burger menu with blur effect & smooth animations active');
 });
