@@ -13,12 +13,18 @@
 </head>
 
 <body>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
     <section id="home">
         <div class="header">
-            <a href="index.html">DaveLabs</a>
+            <a href="#" class="logo-link" id="logoHomeLink">
+                <img src="images/logo.png" alt="DaveLabsDev Logo" style="height: 70px; width: 70px; border-radius: 12px;">
+            </a>
         </div>
 
-        <!-- Mobile Burger Menu Button -->
         <div class="burger-menu">
             <div class="burger-icon">
                 <span></span>
@@ -33,6 +39,7 @@
             <a href="#why-us">Why Us</a>
             <a href="#tech-stack">Tech Stack</a>
             <a href="#pricing">Pricing</a>
+            <a href="#featured-projects">Projects</a>
             <a href="#contact-us">Contact Us</a>
         </nav>
 
@@ -54,7 +61,7 @@
         </div>
 
         <div class="whatsapp">
-            <a href="https://wa.me/254733588676" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/254703659444" target="_blank" rel="noopener noreferrer">
                 <i class="fa-brands fa-whatsapp"></i>
                 <span>Chat on WhatsApp</span>
             </a>
@@ -65,46 +72,11 @@
         <div class="services">
             <h2>Our Services</h2>
             <div class="cards-container">
-                <div class="card">
-                    <div class="bg"></div>
-                    <div class="blob"></div>
-                    <div class="content">
-                        <h3>Web Design</h3>
-                        <p>Modern, responsive websites that help your business grow online.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg"></div>
-                    <div class="blob"></div>
-                    <div class="content">
-                        <h3>E-Commerce</h3>
-                        <p>Online stores that make it easy for customers to buy your products.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg"></div>
-                    <div class="blob"></div>
-                    <div class="content">
-                        <h3>UI/UX Design</h3>
-                        <p>Clean interfaces that improve user experience and engagement.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg"></div>
-                    <div class="blob"></div>
-                    <div class="content">
-                        <h3>Maintenance</h3>
-                        <p>We keep your website updated, secure, and running smoothly.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="bg"></div>
-                    <div class="blob"></div>
-                    <div class="content">
-                        <h3>SEO</h3>
-                        <p>Improve your Google ranking and attract more visitors.</p>
-                    </div>
-                </div>
+                <div class="card"><div class="bg"></div><div class="blob"></div><div class="content"><h3>Web Design</h3><p>Modern, responsive websites that help your business grow online.</p></div></div>
+                <div class="card"><div class="bg"></div><div class="blob"></div><div class="content"><h3>E-Commerce</h3><p>Online stores that make it easy for customers to buy your products.</p></div></div>
+                <div class="card"><div class="bg"></div><div class="blob"></div><div class="content"><h3>UI/UX Design</h3><p>Clean interfaces that improve user experience and engagement.</p></div></div>
+                <div class="card"><div class="bg"></div><div class="blob"></div><div class="content"><h3>Maintenance</h3><p>We keep your website updated, secure, and running smoothly.</p></div></div>
+                <div class="card"><div class="bg"></div><div class="blob"></div><div class="content"><h3>SEO</h3><p>Improve your Google ranking and attract more visitors.</p></div></div>
             </div>
         </div>
     </section>
@@ -113,26 +85,10 @@
         <div class="why-us">
             <h2>Why Choose DaveLabs?</h2>
             <div class="why-us-cards">
-                <div class="why-us-card red">
-                    <i class="fas fa-bolt"></i>
-                    <p class="tip">Fast Delivery</p>
-                    <p class="second-text">We build and deploy projects quickly without sacrificing quality.</p>
-                </div>
-                <div class="why-us-card blue">
-                    <i class="fas fa-palette"></i>
-                    <p class="tip">Modern Design</p>
-                    <p class="second-text">Clean, responsive, and visually stunning interfaces.</p>
-                </div>
-                <div class="why-us-card green">
-                    <i class="fas fa-headset"></i>
-                    <p class="tip">Reliable Support</p>
-                    <p class="second-text">We stay with you even after launch for improvements.</p>
-                </div>
-                <div class="why-us-card purple">
-                    <i class="fas fa-code"></i>
-                    <p class="tip">Custom Solutions</p>
-                    <p class="second-text">Tailored systems built exactly for your needs.</p>
-                </div>
+                <div class="why-us-card red"><i class="fas fa-bolt"></i><p class="tip">Fast Delivery</p><p class="second-text">We build and deploy projects quickly without sacrificing quality.</p></div>
+                <div class="why-us-card blue"><i class="fas fa-palette"></i><p class="tip">Modern Design</p><p class="second-text">Clean, responsive, and visually stunning interfaces.</p></div>
+                <div class="why-us-card green"><i class="fas fa-headset"></i><p class="tip">Reliable Support</p><p class="second-text">We stay with you even after launch for improvements.</p></div>
+                <div class="why-us-card purple"><i class="fas fa-code"></i><p class="tip">Custom Solutions</p><p class="second-text">Tailored systems built exactly for your needs.</p></div>
             </div>
         </div>
     </section>
@@ -182,47 +138,23 @@
         <div class="pricing-container">
             <div class="pricing-card basic">
                 <h3>Starter</h3>
-                <h1 class="price">KES 10,000</h1>
-                <ul>
-                    <li>1-3 Page Website</li>
-                    <li>Responsive Design</li>
-                    <li>Basic UI/UX</li>
-                    <li>Contact Form</li>
-                    <li>Basic SEO Setup</li>
-                </ul>
-                <a href="#contact-us" style="text-decoration: none; color: inherit;">
-                    <button>Get Started</button>
-                </a>
+                <h1>KES 10,000</h1>
+                <ul><li>1-3 Page Website</li><li>Responsive Design</li><li>Basic UI/UX</li><li>Contact Form</li><li>Basic SEO Setup</li></ul>
+                <a href="#contact-us" style="text-decoration: none; color: inherit;"><button>Get Started</button></a>
             </div>
             <div class="pricing-card standard popular">
                 <div class="badge">Most Popular</div>
                 <h3>Growth</h3>
-                <h1 class="price">KES 25,000</h1>
-                <ul>
-                    <li>5-8 Page Website</li>
-                    <li>Custom UI/UX Design</li>
-                    <li>Animations & Interactions</li>
-                    <li>CMS Integration</li>
-                    <li>SEO Optimization</li>
-                </ul>
-                <a href="#contact-us" style="text-decoration: none; color: inherit;">
-                    <button>Get Started</button>
-                </a>
+                <h1>KES 25,000</h1>
+                <ul><li>5-8 Page Website</li><li>Custom UI/UX Design</li><li>Animations & Interactions</li><li>CMS Integration</li><li>SEO Optimization</li></ul>
+                <a href="#contact-us" style="text-decoration: none; color: inherit;"><button>Get Started</button></a>
             </div>
             <div class="pricing-card premium card_box">
                 <span></span>
                 <h3>Pro</h3>
-                <h1 class="price">KES 60,000</h1>
-                <ul>
-                    <li>Full Custom System</li>
-                    <li>Backend + Database</li>
-                    <li>E-Commerce Integration</li>
-                    <li>Advanced Animations</li>
-                    <li>Security + Optimization</li>
-                </ul>
-                <a href="#contact-us" style="text-decoration: none; color: inherit;">
-                    <button>Get Started</button>
-                </a>
+                <h1>KES 60,000</h1>
+                <ul><li>Full Custom System</li><li>Backend + Database</li><li>E-Commerce Integration</li><li>Advanced Animations</li><li>Security + Optimization</li></ul>
+                <a href="#contact-us" style="text-decoration: none; color: inherit;"><button>Get Started</button></a>
             </div>
         </div>
     </section>
@@ -237,37 +169,29 @@
         </div>
     </section>
 
+    <!-- Featured Projects Section -->
+    <section id="featured-projects" class="featured-projects-section">
+        <div class="featured-projects-container">
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">Golden Crust</div><p class="project-desc">Artisan bakery & pastry shop online presence</p><button class="project-view-btn" data-project="Golden Crust">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">Sub Tracker</div><p class="project-desc">Subscription management dashboard</p><button class="project-view-btn" data-project="Sub Tracker">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">Nexa Bank</div><p class="project-desc">Modern digital banking interface for millennials</p><button class="project-view-btn" data-project="Nexa Bank">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">UrbanStay</div><p class="project-desc">Property rental platform with virtual tours</p><button class="project-view-btn" data-project="UrbanStay">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">MediFlow</div><p class="project-desc">Healthcare appointment system for clinics</p><button class="project-view-btn" data-project="MediFlow">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+            <div class="project-outer"><div class="project-dot"></div><div class="featured-project-card"><div class="project-ray"></div><div class="project-text">EcoCycle</div><p class="project-desc">Waste management & recycling tracking solution</p><button class="project-view-btn" data-project="EcoCycle">View Project <i class="fas fa-arrow-right"></i></button><div class="project-line topl"></div><div class="project-line leftl"></div><div class="project-line bottoml"></div><div class="project-line rightl"></div></div></div>
+        </div>
+    </section>
+
     <section id="contact-us">
         <div class="contact-us">
             <h2>Contact Us</h2>
             <p>Have questions, want to start a project or want to collaborate? We'd love to hear from you!</p>
-
-            <div class="input">
-                <input type="text" id="your-name" placeholder="Your Name" required>
-            </div>
-            <div class="input">
-                <input type="text" id="company" placeholder="Company Name (Optional)">
-            </div>
-            <div class="input">
-                <input type="email" id="your-email" placeholder="Email Address" required>
-            </div>
-
-            <div class="phone-container">
-                <input type="tel" id="your-phoneNumber" required placeholder="Phone Number with Country Code">
-            </div>
-
-            <div class="textarea">
-                <textarea required placeholder="Write your message here...." id="your-Message"></textarea>
-            </div>
-
-            <button id="send-via-Email">
-                <i class="fa-solid fa-envelope"></i>
-                <span>Send via Email</span>
-            </button>
-            <button id="send-via-whatsapp">
-                <i class="fa-brands fa-whatsapp"></i>
-                <span>Send via WhatsApp</span>
-            </button>
+            <div class="input"><input type="text" id="your-name" placeholder="Your Name" required></div>
+            <div class="input"><input type="text" id="company" placeholder="Company Name (Optional)"></div>
+            <div class="input"><input type="email" id="your-email" placeholder="Email Address" required></div>
+            <div class="phone-container"><input type="tel" id="your-phoneNumber" required placeholder="Phone Number with Country Code"></div>
+            <div class="textarea"><textarea required placeholder="Write your message here...." id="your-Message"></textarea></div>
+            <button id="send-via-Email"><i class="fa-solid fa-envelope"></i><span>Send via Email</span></button>
+            <button id="send-via-whatsapp"><i class="fa-brands fa-whatsapp"></i><span>Send via WhatsApp</span></button>
         </div>
     </section>
 
@@ -280,6 +204,7 @@
                 <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#tech-stack">Tech Stack</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#featured-projects">Projects</a></li>
                 <li><a href="#contact-us">Contact Us</a></li>
             </ul>
         </div>
