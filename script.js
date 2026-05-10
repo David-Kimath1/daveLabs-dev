@@ -299,7 +299,7 @@ document.querySelectorAll('.project-view-btn').forEach(btn => {
             'Nexa Bank': 'https://nexabank.example.com',
             'UrbanStay': 'https://urbanstay.example.com',
             'MediFlow': 'https://mediflow.example.com',
-            'EcoCycle': 'https://ecocycle.example.com'
+            'Nova Shield': 'https://github.com/David-Kimath1/nova-shield'
         };
         const url = projectLinks[projectName] || '#';
         if (url !== '#') {
