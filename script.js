@@ -72,7 +72,7 @@ toastStyles.textContent = `
 `;
 document.head.appendChild(toastStyles);
 
-// Burger Menu with Blur Overlay - FIXED
+// Burger Menu with Blur Overlay
 function initBurger() {
     const burger = document.querySelector('.burger-menu');
     const nav = document.querySelector('.nav__links');
@@ -80,7 +80,6 @@ function initBurger() {
     
     if (!burger) return;
     
-    // Create blur overlay
     const overlay = document.createElement('div');
     overlay.className = 'blur-overlay';
     document.body.appendChild(overlay);
@@ -103,7 +102,6 @@ function initBurger() {
         body.style.overflow = '';
     };
     
-    // Toggle menu on burger click
     burger.addEventListener('click', (e) => {
         e.stopPropagation();
         if (nav.classList.contains('active')) {
@@ -113,23 +111,19 @@ function initBurger() {
         }
     });
     
-    // Close menu when clicking overlay
     overlay.addEventListener('click', closeMenu);
     
-    // Close menu when clicking any nav link
     const navLinks = document.querySelectorAll('.nav__links a');
     navLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
     
-    // Close menu on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && nav.classList.contains('active')) {
             closeMenu();
         }
     });
     
-    // Handle window resize - close menu if switching to desktop
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
@@ -141,7 +135,6 @@ function initBurger() {
     });
 }
 
-// Initialize burger menu
 initBurger();
 
 // Phone Input (intl-tel-input)
@@ -178,18 +171,18 @@ function validateForm() {
     const { name, email, phone, message } = getFormData();
     if (!name) { showToast('Please enter your full name', 'error'); return false; }
     if (!email) { showToast('Email address is required', 'error'); return false; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Valid email required', 'error'); return false; }
-    if (!phone) { showToast('Phone number required', 'error'); return false; }
-    if (iti && !iti.isValidNumber()) { showToast('Valid phone number required', 'error'); return false; }
-    if (!message) { showToast('Message required', 'error'); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email address', 'error'); return false; }
+    if (!phone) { showToast('Phone number is required', 'error'); return false; }
+    if (iti && !iti.isValidNumber()) { showToast('Please enter a valid phone number', 'error'); return false; }
+    if (!message) { showToast('Please describe your issue or request', 'error'); return false; }
     return true;
 }
 
 async function sendEmail(formData) {
-    const fullMessage = `Name: ${formData.name}\nCompany: ${formData.company || 'Not provided'}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nCountry: ${formData.countryName}\n\nMessage:\n${formData.message}`;
+    const fullMessage = `Name: ${formData.name}\nCompany: ${formData.company || 'Not provided'}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nCountry: ${formData.countryName}\n\nIssue/Request:\n${formData.message}`;
     try {
         await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-            title: `New message from ${formData.name}`,
+            title: `New service request from ${formData.name}`,
             from_name: formData.name,
             from_email: formData.email,
             reply_email: formData.email,
@@ -222,7 +215,7 @@ document.getElementById('send-via-Email')?.addEventListener('click', async (e) =
     btn.disabled = true;
     const res = await sendEmail(getFormData());
     if (res.success) {
-        showToast('Message sent successfully! We will respond within 24 hours.', 'success');
+        showToast('Message sent successfully! We will get back to you soon.', 'success');
         resetForm();
     } else {
         showToast('Failed to send. Please try again or use WhatsApp.', 'error');
@@ -236,11 +229,11 @@ document.getElementById('send-via-whatsapp')?.addEventListener('click', (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     const d = getFormData();
-    let msg = `Name: ${d.name}\n`;
-    if (d.company) msg += `Company: ${d.company}\n`;
-    msg += `Phone: ${d.phone}\nEmail: ${d.email}\n\nMessage:\n${d.message}`;
-    window.open(`https://wa.me/254703659444?text=${encodeURIComponent(msg)}`, '_blank');
-    showToast('WhatsApp will open to send your message.', 'info');
+    let msg = `Hello DaveLabs Tech,%0A%0AName: ${d.name}%0A`;
+    if (d.company) msg += `Company: ${d.company}%0A`;
+    msg += `Phone: ${d.phone}%0AEmail: ${d.email}%0A%0AIssue/Request:%0A${d.message}`;
+    window.open(`https://wa.me/254703659444?text=${msg}`, '_blank');
+    showToast('Opening WhatsApp to send your message.', 'info');
 });
 
 // Smooth Scroll for Navigation Links
@@ -288,28 +281,6 @@ window.addEventListener('scroll', () => {
 });
 updateActiveNav();
 
-// Featured Projects Button Handlers
-document.querySelectorAll('.project-view-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const projectName = btn.getAttribute('data-project') || 'Project';
-        // Replace with actual project URLs
-        const projectLinks = {
-            'Golden Crust': 'https://golden-crust-dave-o-lopers-projects.vercel.app/',
-            'Sub Tracker': 'https://subscripti0n-tracker.vercel.app/',
-            'Nexa Bank': 'https://nexabank.example.com',
-            'UrbanStay': 'https://urbanstay.example.com',
-            'MediFlow': 'https://mediflow.example.com',
-            'Nova Shield': 'https://github.com/David-Kimath1/nova-shield'
-        };
-        const url = projectLinks[projectName] || '#';
-        if (url !== '#') {
-            window.open(url, '_blank');
-        } else {
-            showToast('Project link coming soon!', 'info');
-        }
-    });
-});
-
 // Character Counter for Textarea
 const textarea = document.getElementById('your-Message');
 if (textarea) {
@@ -330,17 +301,17 @@ if (textarea) {
             counter.style.color = '#999';
             iconChar.style.color = '#999';
         } else if (len < 20) {
-            counter.innerHTML = `${len} characters (recommended: 20+)`;
-            counter.style.color = '#ff9800';
-            iconChar.style.color = '#ff9800';
+            counter.innerHTML = `${len} characters (add a bit more detail)`;
+            counter.style.color = '#f97316';
+            iconChar.style.color = '#f97316';
         } else {
-            counter.innerHTML = `${len} characters - looking good`;
-            counter.style.color = '#28a745';
-            iconChar.style.color = '#28a745';
+            counter.innerHTML = `${len} characters - great detail`;
+            counter.style.color = '#10b981';
+            iconChar.style.color = '#10b981';
         }
     }
     textarea.addEventListener('input', updateCounter);
     updateCounter();
 }
 
-console.log('DaveLabs website ready - Fixed burger menu navigation with unified dark mode styling');
+console.log('DaveLabs Tech website ready - Your trusted computer service partner.');
